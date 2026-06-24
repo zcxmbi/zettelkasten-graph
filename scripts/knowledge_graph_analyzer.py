@@ -10,8 +10,8 @@ from collections import defaultdict
 import networkx as nx
 
 # === 配置 ===
-VAULT = Path(r"D:\文件\我的知识体系")
-OUTPUT_JSON = Path(r"D:\文件\我的知识体系\knowledge_graph.json")
+VAULT = Path(os.environ.get("GRAPH_KASTEN_VAULT", "."))
+OUTPUT_JSON = VAULT / "knowledge_graph.json"
 EXCLUDE_DIRS = {".git", ".obsidian", ".trash"}
 DEFAULT_WEIGHT = 0.5
 

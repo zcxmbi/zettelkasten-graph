@@ -14,7 +14,7 @@ import json, sys
 from pathlib import Path
 from collections import defaultdict
 
-GRAPH = Path(r"D:\文件\我的知识体系\knowledge_graph.json")
+GRAPH = Path(os.environ.get("GRAPH_KASTEN_VAULT", ".")) / "knowledge_graph.json"
 
 
 def load():

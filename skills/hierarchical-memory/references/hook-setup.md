@@ -1,7 +1,7 @@
 # Hook 配置详情
 
 ## 脚本位置
-`C:\Users\86198\AppData\Local\hermes\hooks\mem-sync-check.py`
+`<hermes-user-path>\AppData\Local\hermes\hooks\mem-sync-check.py`
 
 ## config.yaml 配置
 ```yaml

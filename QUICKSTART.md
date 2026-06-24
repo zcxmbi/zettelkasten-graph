@@ -34,7 +34,7 @@ that turns a value-charged condition of a character's life.
 Edit `scripts/knowledge_graph_analyzer.py` line 14:
 
 ```python
-VAULT = Path(r"D:\your\notes\folder")
+VAULT = Path("/path/to/your/notes")
 ```
 
 ## 4. Build and Analyze

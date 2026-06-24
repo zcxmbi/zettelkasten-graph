@@ -15,7 +15,7 @@ category: productivity
 |------|---------|---------|-------------|---------|
 | **活跃记忆** | `memory` tool 存储 / MEMORY.md 产物 | `memory(action='add'/'replace'/'remove', target='memory')` | 每轮对话自动加载 | 参考记忆使用 ≥10 次 |
 | **参考记忆** | `memory` tool 存储 / MEMORY.md 产物 | 同上，内容以 `[参考]` 开头 | 按需检索 | — |
-| **隐藏记忆** | `D:\\文件\\我的知识体系\\` 中的 `.md` 文件 | `write_file` 写入 `.md`，然后 `memory(action='add')` 登记 `[参考]` 行 | 不加载，不占上下文 | 被动引用、主动检索或记忆登记命中 1 次 |
+| **隐藏记忆** | `<vault-path>/` 中的 `.md` 文件 | `write_file` 写入 `.md`，然后 `memory(action='add')` 登记 `[参考]` 行 | 不加载，不占上下文 | 被动引用、主动检索或记忆登记命中 1 次 |
 
 **特殊规则：实践优先原则**
 
@@ -27,7 +27,7 @@ category: productivity
 ## 二、物理存储
 
 ### 2.1 知识体系文件夹 — 隐藏记忆池（冷存储）
-- 路径：`D:\文件\我的知识体系`
+- 路径：`<vault-path>`
 - 所有 `.md` 文件天然是隐藏记忆
 - 不占上下文，通过搜索唤醒
 - **Git 版本控制**
@@ -44,11 +44,11 @@ category: productivity
 
 | 内容类型 | 存放位置 | 登记方式 |
 |:---------|:---------|:---------|
-| **通用知识**（可复用于多个项目的概念、理论、模板） | `D:\文件\我的知识体系\` | `memory(action='add')` 加 `[参考]` 行 |
-| **项目设计文档**（专属于某个游戏/项目的设计文件） | `D:\Game\Project\<项目名>\` | `memory(action='add')` 加 `[参考]` 行，路径指向项目文件夹 |
-| **项目内的验证脚本/工具** | `D:\Game\Project\<项目名>\scripts\` | 不登记 reference |
+| **通用知识**（可复用于多个项目的概念、理论、模板） | `<vault-path>/` | `memory(action='add')` 加 `[参考]` 行 |
+| **项目设计文档**（专属于某个游戏/项目的设计文件） | `<project-path>/<项目名>\` | `memory(action='add')` 加 `[参考]` 行，路径指向项目文件夹 |
+| **项目内的验证脚本/工具** | `<project-path>/<项目名>\scripts\` | 不登记 reference |
 
-**不把项目文档放入 `D:\文件\我的知识体系\`**，即使主题相同。文件属于项目则放在项目里，知识体系只存通用化的、跨项目可复用的抽象知识。
+**不把项目文档放入 `<vault-path>/`**，即使主题相同。文件属于项目则放在项目里，知识体系只存通用化的、跨项目可复用的抽象知识。
 
 当同时操作两类内容时，先确认目标文件夹再写入，避免写错位置后二次搬运。
 
@@ -59,7 +59,7 @@ category: productivity
 1. **读取** — `read_file` 获取外部内容（视频文案、文章、论文等）
 2. **提取** — 从内容中抽取出目标主题的所有相关论述
 3. **补充** — 用自己的知识补充外部来源未覆盖的内容（标记为"补充"）
-4. **结构化** — 按 Zettelkasten 格式写成 `.md` 笔记文件，存入 `D:\文件\我的知识体系\`
+4. **结构化** — 按 Zettelkasten 格式写成 `.md` 笔记文件，存入 `<vault-path>/`
 5. **登记** — `memory(action='add', target='memory')` 以 `[参考]` 格式登记，供后续按需检索
 6. **索引** — 若为新领域，创建 `_索引.md` MOC 笔记
 
@@ -69,7 +69,7 @@ category: productivity
 
 ```
 知识体系文件夹（冷）           memory tool 存储（热）
-D:\文件\我的知识体系\          memory(action='add', ...)
+<vault-path>/          memory(action='add', ...)
 ┌──────────────────┐         ┌──────────────────────────┐
 │ 任何 .md 文件     │──复苏→  │ 以 [参考] 格式登记      │
 │ （隐藏记忆）      │ 命中+1  │ count 自增机制           │
@@ -91,7 +91,7 @@ D:\文件\我的知识体系\          memory(action='add', ...)
 
 ```python
 # 单条写入
-memory(action='add', target='memory', content='代理软件 Shark Cloud，HTTP 代理端口 7897…')
+memory(action='add', target='memory', content='代理软件 <your-proxy>，HTTP 代理端口 <your-port>…')
 
 # 批量原子写入（推荐：先清旧后加新，防超限）
 memory(action='add', target='memory',
@@ -122,7 +122,7 @@ memory(action='remove', target='memory', old_text='要删除条目标识子串')
 
 ```python
 # 写入笔记
-write_file(path='D:\\文件\\我的知识体系\\游戏设计\\双被论锦标赛_7节点模型.md',
+write_file(path='<vault-path>/游戏设计\\双被论锦标赛_7节点模型.md',
            content='# 标题\n\n正文…')
 
 # 登记参考记忆
