@@ -8,10 +8,10 @@ If you are an AI setting up graph-kasten for a user, follow these steps:
 
    > "Where are your Markdown notes stored? I need the absolute path to the directory."
 
-2. **Configure the vault path** by writing the `.env` file:
+2. **Configure the vault path** by writing `.env` in the scripts directory:
 
    ```bash
-   echo "GRAPH_KASTEN_VAULT=/absolute/path/to/notes" > .env
+   echo "GRAPH_KASTEN_VAULT=/absolute/path/to/notes" > scripts/.env
    ```
 
 3. **Install dependencies**:
