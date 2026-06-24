@@ -43,11 +43,23 @@ Direction: writing `[[B]]` in note A creates edge A→B. If B also writes `[[A]]
 
 ## Usage
 
-```bash
-# After editing notes, rebuild the graph
-python scripts/knowledge_graph_analyzer.py
+### Install
 
-# Query the graph (no folders or MOCs needed)
+```bash
+pip install -r requirements.txt
+```
+
+Edit `scripts/knowledge_graph_analyzer.py` line 14 to point to your notes directory.
+
+### Analyze
+
+```bash
+python scripts/knowledge_graph_analyzer.py
+```
+
+### Query
+
+```bash
 python scripts/knowledge_graph_query.py community     # list all communities
 python scripts/knowledge_graph_query.py core 10       # top 10 by PageRank
 python scripts/knowledge_graph_query.py neighbors X   # neighbors of a note
