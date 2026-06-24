@@ -2,7 +2,7 @@
 
 ## For AI Agents
 
-If you are an AI setting up graph-kasten for a user, follow these steps:
+If you are an AI setting up agent-note-graph for a user, follow these steps:
 
 1. **Ask the user** where their Markdown notes live (flat directory, no subfolders):
 
@@ -35,8 +35,8 @@ If you are an AI setting up graph-kasten for a user, follow these steps:
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/yourname/graph-kasten.git
-cd graph-kasten
+git clone https://github.com/yourname/agent-note-graph.git
+cd agent-note-graph
 pip install -r requirements.txt
 ```
 

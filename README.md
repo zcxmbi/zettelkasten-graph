@@ -1,4 +1,4 @@
-# graph-kasten
+# agent-note-graph
 
 > Zettelkasten meets graph theory. Weighted knowledge graph analysis for atomic note-taking.
 

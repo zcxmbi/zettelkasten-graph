@@ -1,4 +1,4 @@
-# graph-kasten
+# agent-note-graph
 
 > Zettelkasten 遇上图论。为原子笔记打造的加权知识图分析工具。
 
@@ -45,7 +45,7 @@
 
 ### AI Agent 安装
 
-如果你是 AI，为用户设置 graph-kasten：
+如果你是 AI，为用户设置 agent-note-graph：
 
 1. 询问用户的笔记目录路径
 2. `echo "GRAPH_KASTEN_VAULT=/路径" > scripts/.env`
@@ -56,8 +56,8 @@
 ### 人类安装
 
 ```bash
-git clone https://github.com/yourname/graph-kasten.git
-cd graph-kasten
+git clone https://github.com/yourname/agent-note-graph.git
+cd agent-note-graph
 pip install -r requirements.txt
 cp scripts/.env.example scripts/.env
 # 编辑 scripts/.env 设置笔记路径
