@@ -1,8 +1,8 @@
 # agent-note-graph
 
-> Zettelkasten meets graph theory. Weighted knowledge graph analysis for atomic note-taking.
+> Zettelkasten + Agent + Graph Theory. A knowledge base built by you and AI, together.
 
-Replace folders and MOCs with a mathematical knowledge graph. Each note is a node, each `[[link]]` is a weighted edge. Run network analysis to discover the hidden structure of your thinking.
+AI links your notes. Graph theory audits the AI. Treat your notes like a social network—rank, navigate, discover hidden clusters. 14 analysis methods.
 
 ## The Problem
 
