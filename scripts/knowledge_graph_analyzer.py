@@ -9,7 +9,19 @@ from pathlib import Path
 from collections import defaultdict
 import networkx as nx
 
-# === 配置 ===
+# === 配置加载（优先级：.env > 环境变量 > 默认值） ===
+def _load_env():
+    """从脚本所在目录的 .env 文件加载配置"""
+    env_file = Path(__file__).resolve().parent / ".env"
+    if env_file.exists():
+        for line in env_file.read_text(encoding="utf-8").split("\n"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, _, val = line.partition("=")
+                os.environ.setdefault(key.strip(), val.strip())
+
+_load_env()
+
 VAULT = Path(os.environ.get("GRAPH_KASTEN_VAULT", "."))
 OUTPUT_JSON = VAULT / "knowledge_graph.json"
 EXCLUDE_DIRS = {".git", ".obsidian", ".trash"}

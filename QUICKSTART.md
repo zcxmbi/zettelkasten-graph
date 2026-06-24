@@ -1,6 +1,38 @@
 # Quick Start
 
-## 1. Install
+## For AI Agents
+
+If you are an AI setting up graph-kasten for a user, follow these steps:
+
+1. **Ask the user** where their Markdown notes live (flat directory, no subfolders):
+
+   > "Where are your Markdown notes stored? I need the absolute path to the directory."
+
+2. **Configure the vault path** by writing the `.env` file:
+
+   ```bash
+   echo "GRAPH_KASTEN_VAULT=/absolute/path/to/notes" > .env
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Verify** the setup works:
+
+   ```bash
+   python scripts/knowledge_graph_analyzer.py
+   ```
+
+   This will scan all `.md` files, build the graph, run all 14 analyses, and generate `knowledge_graph.json` in the vault directory.
+
+5. **Report** the summary to the user — node count, edge count, connectivity %, ghost links.
+
+## For Humans
+
+### 1. Clone and Install
 
 ```bash
 git clone https://github.com/yourname/graph-kasten.git
@@ -8,55 +40,53 @@ cd graph-kasten
 pip install -r requirements.txt
 ```
 
-## 2. Prepare Your Notes
+### 2. Configure
 
-Put all your Markdown notes in one flat directory (no folders). Use the link syntax:
+Copy the example env file and set your notes directory:
+
+```bash
+cp .env.example .env
+# Edit .env: GRAPH_KASTEN_VAULT=/path/to/your/notes
+```
+
+Or export the environment variable:
+
+```bash
+export GRAPH_KASTEN_VAULT=/path/to/your/notes
+```
+
+### 3. Prepare Your Notes
+
+All notes must be in one flat directory. Use the weighted link syntax:
 
 ```markdown
-# 场景 (Scene)
+# Scene
 
 > The basic dynamic unit of story design.
 
-## Definition
-
-A scene is an action through conflict in a continuous time and space,
-that turns a value-charged condition of a character's life.
-
 ## 相关笔记
 
-- [[节拍]] 0.95 — 场景由节拍构成，是最小结构成分
-- [[事件]] 0.9 — 理想的场景就是一个故事事件
-- [[序列]] 0.85 — 若干场景构成一个序列
+- [[节拍]] 0.95 — scene is composed of beats
+- [[事件]] 0.9 — an ideal scene is a story event
 ```
 
-## 3. Set Your Vault Path
-
-Edit `scripts/knowledge_graph_analyzer.py` line 14:
-
-```python
-VAULT = Path("/path/to/your/notes")
-```
-
-## 4. Build and Analyze
+### 4. Build and Analyze
 
 ```bash
 python scripts/knowledge_graph_analyzer.py
 ```
 
-Outputs:
-- Full 14-method analysis report
-- `knowledge_graph.json` — the graph data
-
-## 5. Query
+### 5. Query
 
 ```bash
-python scripts/knowledge_graph_query.py core 10       # your most important notes
-python scripts/knowledge_graph_query.py neighbors 场景  # what connects to 场景?
+python scripts/knowledge_graph_query.py core 10       # top 10 most important
+python scripts/knowledge_graph_query.py neighbors 场景  # what links to 场景?
 python scripts/knowledge_graph_query.py path 节拍 利益矛盾的建立  # how are they related?
 python scripts/knowledge_graph_query.py expand 场景 2   # explore 2 hops from 场景
+python scripts/knowledge_graph_query.py community     # natural clusters
 ```
 
-## Link Syntax Reference
+## Link Syntax
 
 ```
 [[target]]                 → weight 0.5, A→B
@@ -64,10 +94,9 @@ python scripts/knowledge_graph_query.py expand 场景 2   # explore 2 hops from 
 [[target]] 0.3 — notes     → weight + description
 ```
 
-| Weight | Relationship | Example |
-|:---|:---|:---|
-| 0.7–0.9 | Structural / causal | 场景 contains 节拍 |
-| 0.5–0.7 | Complementary principles | Two sides of the same idea |
-| 0.3–0.5 | Combinable but not direct | Two techniques can be used together |
-| 0.1–0.3 | Loose thematic link | Example → concept |
-| 0.1 | Floor connection | Barely related, but not isolated |
+| Weight | Relationship |
+|:---|:---|
+| 0.7–0.9 | Structural / causal |
+| 0.5–0.7 | Complementary principles |
+| 0.3–0.5 | Combinable techniques |
+| 0.1–0.3 | Loose thematic link |

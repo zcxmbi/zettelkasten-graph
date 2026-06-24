@@ -10,9 +10,21 @@
   python knowledge_graph_query.py 扩展 <笔记名> [跳数] → BFS N跳可达的所有笔记
   python knowledge_graph_query.py 桥接              → 介数中心性 top 桥接笔记
 """
-import json, sys
+import json, sys, os
 from pathlib import Path
 from collections import defaultdict
+
+# === 配置加载（优先级：.env > 环境变量 > 默认值） ===
+def _load_env():
+    env_file = Path(__file__).resolve().parent / ".env"
+    if env_file.exists():
+        for line in env_file.read_text(encoding="utf-8").split("\n"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, _, val = line.partition("=")
+                os.environ.setdefault(key.strip(), val.strip())
+
+_load_env()
 
 GRAPH = Path(os.environ.get("GRAPH_KASTEN_VAULT", ".")) / "knowledge_graph.json"
 
