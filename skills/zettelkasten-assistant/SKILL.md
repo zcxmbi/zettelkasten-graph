@@ -157,7 +157,8 @@ python knowledge_graph_analyzer.py
 4. **模板生成**：为特定类型笔记生成 Markdown 模板。游戏开发相关的数学分析笔记使用 `references/game-dev-math-note-template.md`
 5. **操作指导**：随时提醒用户在 Zettlr 中完成某功能的具体按键和步骤
 6. **进展复盘**：定期陪用户回顾知识网络，找出缺口或意外连接
-7. **图论分析**：用图论工具量化评估知识网络健康度。支持的 11 种方法详见 `references/graph-analysis.md`
+8. **图论分析**：用图论工具量化评估知识网络健康度。已实现方法：PageRank、介数中心性、Louvain社区检测、Dijkstra最短路径、链接预测(Jaccard/Adamic-Adar)、缺失节点预测、过载节点检测、边审计(不对称/传递性/权重异常)。详见 `references/graph-analysis.md` 和 `references/edge-auditing.md`
+9. **边审计**：用图结构反向检验AI赋值的边是否合理——检测不对称异常（高权重单向边应有反向）、传递性违反（A→B高+B→C高但A→C缺失）、低权桥接、权重偏低。详见 `references/edge-auditing.md`
 8. **孤立节点批量接入**：发现孤立节点后，按以下流程接入图网络：
    - 每次读取 5 篇孤立笔记内容
    - 逐篇分析主题→匹配已有概念→确定权重和方向
@@ -199,14 +200,15 @@ created: 2026-06-21
 
 定期运行以下检查，不依赖文件夹或 MOC：
 
-| # | 检查项 | 命令/方法 |
-|---|--------|----------|
-| 1 | YAML 格式统一 | 全量扫描 frontmatter 字段 |
-| 2 | 幽灵链接 | `python knowledge_graph_analyzer.py`，必须为 0 |
-| 3 | 连通性 | 最大连通分量应 > 90% |
-| 4 | 孤立节点 | `python knowledge_graph_query.py 孤立` |
-| 5 | 链接预测 | 对高 Jaccard/Adamic-Adar 分但未连边的笔记对，评估是否需要加链接 |
-| 6 | 备份同步 | 知识体系备份与主目录一致 |
+| # | 检查项 | 方法 | 命令/说明 |
+|---|--------|------|----------|
+| 1 | YAML 格式统一 | 全量扫描 frontmatter | — |
+| 2 | **断链检测** | 检查指向不存在笔记的链接 | `python knowledge_graph_analyzer.py`，必须为 0 |
+| 3 | 连通性 | 最大连通分量应 > 90% | 分析器输出 |
+| 4 | 孤立节点 | 找出未接入图网络的笔记 | `python knowledge_graph_query.py 孤立` |
+| 5 | **补链推荐** | 对高 Jaccard/Adamic-Adar 分但未连边的笔记对 | 分析器输出 |
+| 6 | **链接质量审查** | 图自检：不对称/传递缺失/权重偏差 | 公式推荐+人确认 |
+| 7 | 备份同步 | 知识体系备份与主目录一致 | — |
 
 ## 过载节点检测与拆分
 
