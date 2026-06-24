@@ -1,4 +1,4 @@
-# agent-note-graph
+# zettelkasten-graph
 
 > Zettelkasten + Agent + Graph Theory. A knowledge base built by you and AI, together.
 

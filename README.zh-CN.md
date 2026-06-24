@@ -1,4 +1,4 @@
-# agent-note-graph
+# zettelkasten-graph
 
 > 卡片盒笔记 + Agent + 图论。人机共构的知识库。
 
