@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+knowledge_graph.json
+.DS_Store
+
+scripts/.env

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1280px; height: 640px;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d1b2a 100%);
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+.grid {
+  position: absolute; inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.node {
+  position: absolute; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #fff; font-weight: 600;
+  box-shadow: 0 0 20px rgba(255,255,255,0.15);
+}
+.node-core { width: 56px; height: 56px; }
+.node-medium { width: 42px; height: 42px; font-size: 9px; }
+.node-small { width: 30px; height: 30px; font-size: 7px; }
+@keyframes pulse1 { 0%,100%{opacity:0.6} 50%{opacity:1} }
+.overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; flex-direction: column;
+  background: linear-gradient(180deg, transparent 55%, rgba(10,10,26,0.85) 75%, rgba(10,10,26,0.95) 100%);
+}
+.title-area { position: absolute; top: 40px; left: 50%;
+  transform: translateX(-50%); text-align: center; }
+.title {
+  font-size: 52px; font-weight: 800; color: #fff;
+  letter-spacing: 2px;
+  text-shadow: 0 0 40px rgba(100,180,255,0.4);
+}
+.title span { color: #60c0ff; }
+.subtitle {
+  font-size: 18px; color: rgba(255,255,255,0.7);
+  margin-top: 12px; font-weight: 400;
+}
+.badges {
+  position: absolute; bottom: 80px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 16px; flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1100px;
+}
+.badge {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 12px 18px;
+  color: #fff; font-size: 14px; font-weight: 500;
+  white-space: nowrap;
+}
+.badge em { color: #60c0ff; font-style: normal; font-weight: 700; }
+.footer {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px; color: rgba(255,255,255,0.35);
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<svg class="edges" viewBox="0 0 1280 640" style="position:absolute;inset:0;pointer-events:none;">
+  <defs>
+    <linearGradient id="g1"><stop offset="0%" stop-color="#60c0ff" stop-opacity="0.5"/><stop offset="100%" stop-color="#a080ff" stop-opacity="0.3"/></linearGradient>
+    <linearGradient id="g2"><stop offset="0%" stop-color="#ff6080" stop-opacity="0.4"/><stop offset="100%" stop-color="#ffa060" stop-opacity="0.3"/></linearGradient>
+    <linearGradient id="g3"><stop offset="0%" stop-color="#60ffa0" stop-opacity="0.35"/><stop offset="100%" stop-color="#60c0ff" stop-opacity="0.5"/></linearGradient>
+  </defs>
+  <line x1="640" y1="280" x2="340" y2="200" stroke="url(#g1)" stroke-width="3" opacity="0.8"/>
+  <line x1="640" y1="280" x2="780" y2="160" stroke="url(#g1)" stroke-width="3" opacity="0.8"/>
+  <line x1="640" y1="280" x2="500" y2="380" stroke="url(#g2)" stroke-width="2.5" opacity="0.7"/>
+  <line x1="640" y1="280" x2="850" y2="350" stroke="url(#g2)" stroke-width="2.5" opacity="0.7"/>
+  <line x1="640" y1="280" x2="640" y2="120" stroke="url(#g3)" stroke-width="2" opacity="0.6"/>
+  <line x1="640" y1="280" x2="420" y2="120" stroke="url(#g3)" stroke-width="2" opacity="0.5"/>
+  <line x1="640" y1="280" x2="920" y2="240" stroke="url(#g1)" stroke-width="2.5" opacity="0.7"/>
+  <line x1="340" y1="200" x2="220" y2="140" stroke="url(#g1)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="340" y1="200" x2="200" y2="280" stroke="url(#g2)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="780" y1="160" x2="980" y2="120" stroke="url(#g1)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="780" y1="160" x2="1020" y2="200" stroke="url(#g2)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="500" y1="380" x2="360" y2="440" stroke="url(#g2)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="850" y1="350" x2="1020" y2="380" stroke="url(#g3)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="640" y1="120" x2="540" y2="60" stroke="url(#g3)" stroke-width="1" opacity="0.3"/>
+  <line x1="640" y1="120" x2="750" y2="80" stroke="url(#g1)" stroke-width="1" opacity="0.3"/>
+  <line x1="420" y1="120" x2="300" y2="80" stroke="url(#g3)" stroke-width="1" opacity="0.3"/>
+  <line x1="920" y1="240" x2="1100" y2="280" stroke="url(#g1)" stroke-width="1.5" opacity="0.4"/>
+  <line x1="220" y1="140" x2="130" y2="200" stroke="url(#g1)" stroke-width="1" opacity="0.3"/>
+  <line x1="200" y1="280" x2="120" y2="340" stroke="url(#g2)" stroke-width="1" opacity="0.3"/>
+  <line x1="980" y1="120" x2="1100" y2="160" stroke="url(#g1)" stroke-width="1" opacity="0.3"/>
+  <line x1="1020" y1="200" x2="1140" y2="200" stroke="url(#g2)" stroke-width="1" opacity="0.3"/>
+</svg>
+
+<div class="node node-core" style="left:612px; top:252px; background:radial-gradient(circle,#4ac0ff,#2080d0); animation: pulse1 3s infinite;">Core</div>
+<div class="node node-medium" style="left:315px; top:175px; background:radial-gradient(circle,#ff6090,#c03060);">Event</div>
+<div class="node node-medium" style="left:755px; top:135px; background:radial-gradient(circle,#a080ff,#6040c0);">Rhythm</div>
+<div class="node node-medium" style="left:475px; top:355px; background:radial-gradient(circle,#60ffa0,#20a050);">Stake</div>
+<div class="node node-medium" style="left:825px; top:325px; background:radial-gradient(circle,#ffa060,#c06020);">Clash</div>
+<div class="node node-small" style="left:620px; top:100px; background:radial-gradient(circle,#60c0ff,#3080c0);">Beat</div>
+<div class="node node-small" style="left:398px; top:98px; background:radial-gradient(circle,#a080ff,#6040c0);">Seq</div>
+<div class="node node-small" style="left:200px; top:120px; background:radial-gradient(circle,#ff6090,#c03060);">Emp</div>
+<div class="node node-small" style="left:180px; top:258px; background:radial-gradient(circle,#ffa060,#c06020);">Value</div>
+<div class="node node-small" style="left:960px; top:100px; background:radial-gradient(circle,#60ffa0,#20a050);">Char</div>
+<div class="node node-small" style="left:1000px; top:178px; background:radial-gradient(circle,#60c0ff,#3080c0);">Twist</div>
+<div class="node node-small" style="left:340px; top:418px; background:radial-gradient(circle,#ff6090,#c03060);">Tmpl</div>
+<div class="node node-small" style="left:1000px; top:358px; background:radial-gradient(circle,#a080ff,#6040c0);">Layer</div>
+<div class="node node-small" style="left:520px; top:42px; background:radial-gradient(circle,#60ffa0,#20a050);">Act</div>
+<div class="node node-small" style="left:730px; top:62px; background:radial-gradient(circle,#ffa060,#c06020);">Narr</div>
+<div class="node node-small" style="left:280px; top:62px; background:radial-gradient(circle,#60c0ff,#3080c0);">Arc</div>
+<div class="node node-small" style="left:1080px; top:258px; background:radial-gradient(circle,#ff6090,#c03060);">Truth</div>
+<div class="node node-small" style="left:1080px; top:138px; background:radial-gradient(circle,#a080ff,#6040c0);">Belong</div>
+<div class="node node-small" style="left:108px; top:178px; background:radial-gradient(circle,#60ffa0,#20a050);">Chase</div>
+<div class="node node-small" style="left:100px; top:320px; background:radial-gradient(circle,#a080ff,#6040c0);">Rise</div>
+<div class="node node-small" style="left:1120px; top:178px; background:radial-gradient(circle,#ffa060,#c06020);">Grace</div>
+
+<div class="overlay"></div>
+
+<div class="title-area">
+  <div class="title">agent-<span>zettel</span>-graph</div>
+  <div class="subtitle">Zettelkasten + Agent + Graph Theory · Built by you and AI, together</div>
+</div>
+
+<div class="badges">
+  <div class="badge"><em>Core Ranking</em> what matters</div>
+  <div class="badge"><em>Bridge Detection</em> what connects</div>
+  <div class="badge"><em>Natural Groups</em> cluster</div>
+  <div class="badge"><em>Link Review</em> audit AI</div>
+  <div class="badge"><em>Split Suggestions</em> overload</div>
+  <div class="badge"><em>Concept Path</em> navigate</div>
+  <div class="badge" style="background:rgba(96,192,255,0.15); border-color:rgba(96,192,255,0.3);">
+    <em>14 Graph Methods</em>
+  </div>
+</div>
+
+<div class="footer">INSPIRED BY LUHMANN'S ZETTELKASTEN</div>
+</body>
+</html>

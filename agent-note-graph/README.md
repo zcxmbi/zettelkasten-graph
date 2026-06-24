@@ -33,8 +33,6 @@ Traditional Zettelkasten uses folders, MOCs (Maps of Content), and flat `[[links
 
 ## Link Syntax
 
-Fully compatible with Obsidian's `[[wikilink]]` syntax, with weight annotation as a natural extension.
-
 ```markdown
 [[target]]                 → default weight 0.5, directed edge A→B
 [[target]] 0.9             → weight 0.9 (intimacy, 0.01–1.0)
