@@ -21,7 +21,7 @@ Traditional Zettelkasten uses folders, MOCs (Maps of Content), and flat `[[links
 | 3 | **Natural Groups** (Louvain) | How knowledge naturally clusters into topics |
 | 4 | **Concept Path** (Dijkstra) | Optimal path between any two ideas |
 | 5 | **Link Suggestions** (Jaccard/Adamic-Adar) | Notes that should be connected |
-| 6 | **Link Quality Review** | Edges that break structural consistency |
+| 6 | **Link Quality Review** | Detect asymmetry, transitivity gaps, weight deviation. Graph-theoretic consistency check |
 | 7 | **Split Suggestions** (Overload Detection) | Concepts doing too much work |
 | 8 | **Gap Locator** (Missing Node Prediction) | Where a new concept is needed |
 | 9 | **Role Split** (HITS) | Hub (navigator) vs Authority (foundation) |
@@ -30,6 +30,30 @@ Traditional Zettelkasten uses folders, MOCs (Maps of Content), and flat `[[links
 | 12 | **Local Density** (Clustering Coefficient) | Which knowledge areas are tightly linked |
 | 13 | **Break Point Detection** (Articulation Points) | Nodes that would fragment the graph if removed |
 | 14 | **Knowledge Span** (Diameter) | How wide is your knowledge network |
+
+## The Core Insight — Personal Distillation of LLM Companies' Billions
+
+You can't download GPT-4's weights. But you **can** extract its knowledge.
+
+Every Zettelkasten note encodes a piece of understanding. Every weighted link encodes a judgment about how close two concepts are. This is exactly the same structure as a neural network's attention mechanism — concepts with weighted edges.
+
+**zettelkasten-graph** turns this similarity into a pipeline:
+
+1. You write notes + links (your personal knowledge graph)
+2. LLM reads each node's outgoing links and redistributes attention → the LLM becomes your **teacher model**
+3. Compare: your weights vs LLM's attention distribution → surface deviations
+4. You decide: trust the teacher or your own intuition
+
+This is **knowledge distillation at the individual level**. Every note you write, every link you set, is distilled from the models that cost billions to train. Your graph gets better with every run. And when a more powerful model ships tomorrow — re-run the pipeline. The graph stays, the teacher upgrades.
+
+```
+Script: python distill_attention.py "0000085-冲突层面"
+  → LLM reads source + all targets (pure content, no weights shown)
+  → Outputs attention % for each target
+  → Compare with your normalized weights
+  → Mark deviations > 5%
+  → Human judges final correction
+```
 
 ## Link Syntax
 
