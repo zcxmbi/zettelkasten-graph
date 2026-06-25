@@ -6,7 +6,7 @@ AI links your notes. Graph theory audits the AI. An LLM distills its trillion-pa
 
 ## The Core Insight — Personal Distillation of LLM Companies' Billions
 
-You can't download GPT-4's weights. But you **can** extract its knowledge.
+You can't download the strongest models from major labs — but you can extract their knowledge. But you **can** extract its knowledge.
 
 Every Zettelkasten note encodes a piece of understanding. Every weighted link encodes a judgment about how close two concepts are. This is exactly the same structure as a neural network's attention mechanism — concepts with weighted edges.
 
