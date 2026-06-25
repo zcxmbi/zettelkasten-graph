@@ -176,7 +176,7 @@ memory(action='add', target='memory',
 ## 六、Hook 系统
 
 ### 脚本
-`C:\\Users\\86198\\AppData\\Local\\hermes\\hooks\\mem-sync-check.py`
+`~/.hermes\\hooks\\mem-sync-check.py`
 
 > ⚠️ 仅保留 post_tool_call 写入检测（标记文件）。pre_llm_call 注入提醒保留。**已废弃** read_file 自动 count+1 功能（图驱动晋升替代了计数规则）。
 
@@ -184,10 +184,10 @@ memory(action='add', target='memory',
 ```yaml
 hooks:
   post_tool_call:
-    - command: python C:/Users/86198/AppData/Local/hermes/hooks/mem-sync-check.py
+    - command: python ~/AppData/Local/hermes/hooks/mem-sync-check.py
       timeout: 5
   pre_llm_call:
-    - command: python C:/Users/86198/AppData/Local/hermes/hooks/mem-sync-check.py
+    - command: python ~/AppData/Local/hermes/hooks/mem-sync-check.py
       timeout: 5
 hooks_auto_accept: true
 ```

@@ -7,10 +7,10 @@
 ```yaml
 hooks:
   post_tool_call:
-    - command: python C:/Users/86198/AppData/Local/hermes/hooks/mem-sync-check.py
+    - command: python ~/AppData/Local/hermes/hooks/mem-sync-check.py
       timeout: 5
   pre_llm_call:
-    - command: python C:/Users/86198/AppData/Local/hermes/hooks/mem-sync-check.py
+    - command: python ~/AppData/Local/hermes/hooks/mem-sync-check.py
       timeout: 5
 hooks_auto_accept: true
 ```
