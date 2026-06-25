@@ -1,6 +1,6 @@
 # zettelkasten-graph
 
-> Zettelkasten + Agent + Graph Theory. A knowledge base built by you and AI, together.
+> Zettelkasten + Agent + Graph Theory + LLM Distillation. A knowledge base built by you and AI, together.
 
 AI links your notes. Graph theory audits the AI. An LLM distills its trillion-parameter judgment into your personal knowledge weights. Treat your notes like a social network — rank, navigate, discover hidden clusters.
 
@@ -75,12 +75,7 @@ Direction: writing `[[B]]` in note A creates edge A→B. If B also writes `[[A]]
 pip install -r requirements.txt
 ```
 
-Configure `scripts/.env`:
-
-```
-GRAPH_KASTEN_VAULT=/path/to/your/notes
-ATTENTION_API_KEY=sk-your-key
-```
+Configure `scripts/.env` with your vault path and API key.
 
 ### Analyze
 

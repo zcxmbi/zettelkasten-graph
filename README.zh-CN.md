@@ -75,11 +75,8 @@ python scripts/distill_attention.py "笔记名" --dry-run
 pip install -r requirements.txt
 ```
 
-配置 `scripts/.env`：
+配置 `scripts/.env`，填入你的笔记目录路径和 API 密钥。
 
-```
-GRAPH_KASTEN_VAULT=/你的/笔记/目录
-ATTENTION_API_KEY=***
 ### 分析
 
 ```bash
